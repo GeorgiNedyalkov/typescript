@@ -12,7 +12,7 @@ When we add a type to a variable. If we try to assign a new type then we get an 
 
 - Inferred types
 
-### Basic primitive Types:
+### _Basic primitive Types_:
 
 - number
 - string
@@ -36,7 +36,7 @@ let fruit: string[] = ["Apples", "Oranges", "Banana"]
 let randoms: any[] = ["Az", 56, [3, 4, 1]]
 ```
 
-### Tuple
+### _Tuple_
 
 In an array can specify which types there can be in it with a tupple. They also have to be in the exact same order.
 
@@ -53,7 +53,7 @@ employee = [
 ]
 ```
 
-### Unions
+### _Unions_
 
 Unions allow us to use the pipe character to let a variable have more than one types.
 
@@ -64,7 +64,7 @@ productId = 23
 productId = "23"
 ```
 
-### Enum
+### _Enum_
 
 ```typescript
 enum Direction {
@@ -80,6 +80,166 @@ enum HeadPart {
   Hair = "Hair",
   Ears = "Ears",
 }
+```
+
+### _Objects_
+
+We can define objects using `type` to specify the objects structure and types
+
+```typescript
+const user: {
+  id: number
+  name: string
+} = {
+  id: 1,
+  name: "John",
+}
+
+// better way
+
+type User = {
+  id: number
+  name: String
+}
+
+const windowsUser: User = {
+  id: 42,
+  name: "James",
+}
+```
+
+We can assert a given type with type assertions
+
+```typescript
+let customerId: any = 1
+let personId = <number>customerId
+let personaId = customerId as number
+```
+
+### _Functions_
+
+With functions we can define the types of the arguments as well as the return type
+
+```typescript
+function addNum(x: number, y: number): number {
+  return x + y
+}
+console.log(addNum(43, 26))
+```
+
+### _Interfaces_
+
+Interfaces help us define objects.
+Unlike `type` interfaces cannot use primitive or unions.
+We can also specify properties that are readonly.
+
+```typescript
+interface Car {
+  model: string
+  year: number
+  color?: string
+}
+
+let bwm: Car = {
+  model: "bmw",
+  year: 2012,
+}
+
+type Point = number | string
+
+const point1: Point = 1
+
+// with interface we can't use primitives or unions
+// we can also have optional properties and readonly properties
+// we can specify readonly properties
+
+interface MathFunc {
+  (X: number, y: number): number
+}
+
+const sub: MathFunc = (x: number, y: number): number => x - y
+const div: MathFunc = (x: number, y: number): number => x / y
+```
+
+### _Classes_
+
+With classes we can have access modifiers: public (default), private and protected.
+Private can only be used in the class instance.
+
+```typescript
+class Professor {
+  private id: number
+  protected name: string
+  subject: string
+
+  constructor(id: number, name: string, subject: string) {
+    ;(this.id = id), (this.name = name), (this.subject = subject)
+  }
+
+  teach() {
+    return `Use the force ${this.name}`
+  }
+}
+
+const professorX: Professor = new Professor(2, "Xavier", "Mutants")
+
+console.log(professorX.teach())
+```
+
+### Using interface with classes
+
+```typescript
+// Implementing an interface with a class
+
+interface RubicsCube {
+  readonly id: number
+  sides: string
+  color: string[]
+  spin(): string // method returns a string
+}
+
+class YoloRubiks {
+  id: number
+  sides: string
+  color: string[]
+
+  constructor(id: number, sides: string, color: string[]) {
+    ;(this.id = id), (this.sides = sides), (this.color = color)
+  }
+
+  spin() {
+    console.log(`first`)
+  }
+}
+```
+
+### _Subclasses_
+
+```typescript
+class ZoloRubiks extends YoloRubiks {
+  position: string
+
+  constructor(id: number, sides: string, color: string[], position: string) {
+    super(id, sides, color)
+    this.position = position
+  }
+}
+
+const zolo = new ZoloRubiks(3, "4", ["red", "green"], "relative")
+
+console.log(zolo.spin())
+```
+
+### Generics
+
+```typescript
+// Generics
+function getArray<T>(items: T[]): T[] {
+  return new Array().concat(items)
+}
+
+let numArray = getArray<number>([1, 2, 3, 4])
+let strArray = getArray<string>(["Gill", "Jimmy", "Howard"])
 ```
 
 ## TypeScript Compiler
@@ -118,3 +278,7 @@ We can also remove comments. So that our comments are not compiled to the JS fil
 
 - Src
 - Dist
+
+## TypeScript with React
+
+We can include typescript with create-react-app
