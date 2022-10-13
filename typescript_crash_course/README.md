@@ -186,7 +186,7 @@ const professorX: Professor = new Professor(2, "Xavier", "Mutants")
 console.log(professorX.teach())
 ```
 
-### Using interface with classes
+### _Using interface with classes_
 
 ```typescript
 // Implementing an interface with a class
@@ -282,3 +282,7 @@ We can also remove comments. So that our comments are not compiled to the JS fil
 ## TypeScript with React
 
 We can include typescript with create-react-app
+
+```
+npx create-react-app <directory name> --template-typescript
+```
